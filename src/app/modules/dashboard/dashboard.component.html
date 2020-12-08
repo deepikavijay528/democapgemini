@@ -1,0 +1,32 @@
+<app-header></app-header>
+
+<div class="container-fluid">
+
+<div class="setup">
+    <div class="input-group">
+        <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+            placeholder="Start searching for Workspace">
+        <div class="input-group-prepend">
+            <div class="input-group-text btn-primary"> <i class="fa fa-search" aria-hidden="true"></i></div>
+        </div>
+    </div>
+    <button [ngClass]="[ isGrid ? 'btn highlight' : 'btn default' ]" (click)="isGridEnable(true)"><i
+            class="fa fa-th-large"></i> Grid</button>
+    <button [ngClass]="[ !isGrid ? 'btn highlight' : 'btn default' ]" (click)="isGridEnable(false)"><i
+            class="fa fa-bars"></i> List</button>
+</div>
+<div class="row">
+<div [ngClass]="[ !isGrid ? 'col-md-12 list-view' : 'col-md-4 grid-view' ]" *ngFor="let product of products | filter:searchText">
+    <div [ngClass]="[ !isGrid ? 'col-md-1' : 'col-md-3' ]">
+        <div class="thumbnail">
+            <img src='{{ product.thumbnailUrl }}' />
+        </div>
+    </div>
+    <div class="col-md-9">
+        <h4> <span> <i class="fa fa-user"></i> {{product.title}}</span> </h4>
+        <h6>{{product.url}}</h6>
+        <button (click)="addToCart(product)">Buy</button>
+    </div>
+</div>
+</div>
+</div>
